@@ -26,7 +26,7 @@ ShortestPath<T, T2> dijkstra(const Graph<T> &g, int s) {
         int u;
         tie(cost, u) = Q.top();
         Q.pop();
-        if (dist[s] <= cost) {  // 没有用 vis
+        if (dist[u] < cost) {  // 没有用 vis
             continue;
         }
         for (auto &v : g[u]) {
