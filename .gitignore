@@ -1,0 +1,12 @@
+*.exe
+
+*.in
+*.out
+.vscode/*
+tempCodeRunnerFile.cpp
+temp*
+
+work.bat
+*.idea
+*.test
+compile_commands.json
