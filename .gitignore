@@ -10,3 +10,4 @@ work.bat
 *.idea
 *.test
 compile_commands.json
+.verify-helper/config.toml
