@@ -5,7 +5,6 @@ struct ShortestPath {
     vector<T> dist;
     vector<int> from, to;
     vector<T2> num;
-    T inf;
 };
 
 template <typename T, typename T2 = long long>
@@ -42,7 +41,7 @@ ShortestPath<T, T2> dijkstra(const Graph<T> &g, int s) {
             }
         }
     }
-    return {dist, from, id, cnt, inf};
+    return {dist, from, id, cnt};
 }
 
 template <typename T, typename T2 = long long>
@@ -77,5 +76,5 @@ ShortestPath<T, T2> normal_dijkstra(const Graph<T> &g, int s) {
             }
         }
     }
-    return {dist, from, id, cnt, inf};
+    return {dist, from, id, cnt};
 }
