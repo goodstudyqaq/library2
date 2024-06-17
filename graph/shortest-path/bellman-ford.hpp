@@ -28,7 +28,9 @@ vector<T> bellman_ford(const Edges<T> &edges, int n, int s) {
         }
     }
     for (int i = 0; i < n; i++) {
-        if (negative[i]) dist[i] = M_INF;
+        if (negative[i]) {
+            dist[i] = M_INF;
+        }
     }
     return dist;
 }
