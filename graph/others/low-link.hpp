@@ -21,7 +21,7 @@ struct LowLink : Graph<T> {
         dfn.assign(g.size(), 0);
         low.assign(g.size(), 0);
         inde = 0;
-        for (int i = 0; i < g.size(); i++) {
+        for (int i = 0; i < (int)g.size(); i++) {
             if (!vis[i]) dfs(i, -1);
         }
     }
