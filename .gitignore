@@ -11,3 +11,4 @@ work.bat
 *.test
 compile_commands.json
 .verify-helper/config.toml
+tmp.cpp
