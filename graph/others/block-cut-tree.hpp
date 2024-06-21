@@ -1,5 +1,6 @@
 #pragma once
 /*
+https://ei1333.hateblo.jp/entry/2020/03/25/010057
 BlockCutTree: 用割点和不同的点双联通分量相连得到的树
 */
 #include "../connected-components/bi-connectd-components.hpp"
