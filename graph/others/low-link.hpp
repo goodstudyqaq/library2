@@ -1,3 +1,4 @@
+#pragma once
 /*
 https://oi-wiki.org/graph/cut/
 割点和桥
@@ -19,7 +20,6 @@ struct LowLink : Graph<T> {
         vis.assign(g.size(), 0);
         dfn.assign(g.size(), 0);
         low.assign(g.size(), 0);
-
         inde = 0;
         for (int i = 0; i < g.size(); i++) {
             if (!vis[i]) dfs(i, -1);
