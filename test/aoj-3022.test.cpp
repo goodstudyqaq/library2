@@ -7,7 +7,7 @@
 using namespace std;
 
 #ifdef LOCAL
-// #include "copypaste/debug.h"
+#include "copypaste/debug.h"
 #else
 #define debug(...) 42
 #endif
