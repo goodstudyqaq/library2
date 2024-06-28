@@ -123,6 +123,8 @@ struct BipartiteFlow {
     }
 
     vector<vector<int>> build_residual_graph() {
+        // 构造残留网络
+        // 残留网络讲解：https://seineo.github.io/%E5%9B%BE%E8%AE%BA%EF%BC%9A%E6%9C%80%E5%A4%A7%E6%B5%81%E6%9C%80%E5%B0%8F%E5%89%B2%E8%AF%A6%E8%A7%A3.html
         if (!matched) max_matching();
         const size_t S = n + m;
         const size_t T = S + 1;
