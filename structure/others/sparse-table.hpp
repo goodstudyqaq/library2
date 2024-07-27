@@ -6,7 +6,7 @@ using namespace std;
 
 需要补充一些二分函数，O(log) 找到值
 */
-
+// F = function<int(int, int)>
 template <typename T, typename F>
 struct SparseTable {
     F f;
