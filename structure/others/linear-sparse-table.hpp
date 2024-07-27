@@ -112,3 +112,8 @@ struct LinearSparseTable {
         }
     }
 };
+
+template <typename T, typename F>
+LinearSparseTable<T, F> get_linear_sparse_table(const vector<T> &v, const F &f) {
+    return SparseTable<T, F>(v, f);
+}
