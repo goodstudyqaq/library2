@@ -2,6 +2,9 @@
 using namespace std;
 
 // 幂等半群的区间查询
+/*
+需要补充一些二分函数，O(log) 找到值
+*/
 
 template <typename T, typename F>
 struct SparseTable {
