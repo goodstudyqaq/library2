@@ -41,7 +41,7 @@ struct LinearSparseTable {
         }
 
         // 对 newV 做稀疏表
-        st = SparseTable<T, F>(newV, f);
+        st = get_sparse_table(newV, f);
 
         // 对每个块求前缀最大值和后缀最大值
         pre_max = vector<T>(n);
