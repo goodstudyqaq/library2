@@ -1,8 +1,9 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-// 幂等半群的区间查询
-/*
+/* 幂等半群的区间查询, 
+1. fold 查询 [l, r) 的值
+
 需要补充一些二分函数，O(log) 找到值
 */
 
