@@ -1,30 +1,34 @@
 #pragma once
 #include <bits/stdc++.h>
 
-#include <cstddef>
 using namespace std;
 
 struct UnionFind {
     vector<int> data;
+    vector<int> f;
 
     UnionFind() = default;
 
-    explicit UnionFind(size_t sz) : data(sz, -1) {}
+    explicit UnionFind(size_t sz) : data(sz, 1), f(sz) {
+        iota(f.begin(), f.end(), 0);
+    }
 
-    bool unite(int x, int y) {
+    bool unite(int x, int y) { // x merge to y
         x = find(x), y = find(y);
         if (x == y) return false;
-        if (data[x] > data[y]) swap(x, y);
-        data[x] += data[y];
-        data[y] = x;
+        data[y] += data[x];
+        f[x] = y;
         return true;
     }
     int find(int x) {
-        if (data[x] < 0) return x;
-        return data[x] = find(data[x]);
+        if (f[x] == x) return x;
+        int y = find(f[x]);
+        data[y] += data[x];
+        f[x] = y;
+        return f[x];
     }
     int size(int x) {
-        return -data[find(x)];
+        return data[find(x)];
     }
     bool same(int x, int y) {
         return find(x) == find(y);
