@@ -1,16 +1,18 @@
 #include <bits/stdc++.h>
 using namespace std;
 /*
-半群区间操作
+半群单点更新，区间查询操作
 半群定义见 sparse-table.hpp
  */
 /*
 struct Info {
     // 默认值
     Info() {}
-    static Info merge(const Info& left_info, const Info& right_info, int l, int r) { return Info(); };
+    static Info merge(const Info& left_info, const Info& right_info, int l, int r) { 
+        return Info(); 
+    }
     string to_string() {
-        return std::to_string(x);
+        return "";
     }
 };
 */
