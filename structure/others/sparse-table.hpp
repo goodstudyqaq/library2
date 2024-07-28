@@ -1,7 +1,9 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-/* 幂等半群的区间查询, 
+/* 
+半群：若集合 S 和二元运算 op : S X S -> S 满足对任意 x, y, z \in S 都有 op(op(x, y), z) = op(x, (y, z)), 称 (S, op) 为半群
+幂等半群的区间查询, 
 1. fold 查询 [l, r) 的值
 
 需要补充一些二分函数，O(log) 找到值
