@@ -3,6 +3,7 @@ using namespace std;
 /*
 半群单点更新，区间查询操作
 半群定义见 sparse-table.hpp
+todo: find_first + find_last
  */
 /*
 struct Info {
