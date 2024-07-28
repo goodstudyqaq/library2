@@ -1,12 +1,17 @@
 #include <bits/stdc++.h>
 using namespace std;
 /*
+半群区间操作
+半群定义见 sparse-table.hpp
  */
 /*
 struct Info {
     // 默认值
     Info() {}
     static Info merge(const Info& left_info, const Info& right_info, int l, int r) { return Info(); };
+    string to_string() {
+        return std::to_string(x);
+    }
 };
 */
 
@@ -41,6 +46,25 @@ struct SegmentTree {
     // 单点赋值, 会将下标为 L 的点直接赋值为 v
     void assign(int L, const Info& v) {
         return assign(L, v, 0, n - 1, 1);
+    }
+
+    string to_string(int u, int l, int r, string prefix, bool is_lch) {
+        if (l > r) {
+            return "";
+        }
+        string m_prefix = prefix + (u != 1 ? ((is_lch ? "╭── " : "╰── ")) : "");
+        string m_res = info[u].to_string() + "\n";
+        string l_res, r_res;
+        if (l < r) {
+            string l_prefix = prefix + ((u != 1) ? (is_lch ? "    " : "│   ") : "");
+            string r_prefix = prefix + ((u != 1) ? (!is_lch ? "    " : "│   ") : "");
+            l_res = to_string(u * 2, l, l + r >> 1, l_prefix, true);
+            r_res = to_string(u * 2 + 1, (l + r >> 1) + 1, r, r_prefix, false);
+        }
+        return l_res + m_prefix + m_res + r_res;
+    }
+    string to_string() {
+        return to_string(1, 0, n - 1, "", false);
     }
 
    private:
@@ -96,3 +120,8 @@ struct SegmentTree {
 #undef lson
 #undef rson
 };
+
+template <typename Info>
+string to_string(SegmentTree<Info> st) {
+    return "\n" + st.to_string();
+}

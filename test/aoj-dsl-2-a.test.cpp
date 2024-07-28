@@ -25,6 +25,10 @@ struct Info {
         x = _x;
     }
     static Info merge(const Info& left_info, const Info& right_info, int l, int r) { return Info(min(left_info.x, right_info.x)); };
+
+    string to_string() {
+        return std::to_string(x);
+    }
 };
 
 int main() {
