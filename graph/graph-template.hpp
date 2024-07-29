@@ -27,11 +27,12 @@ struct Graph {
 
     size_t size() const { return g.size(); }
 
-    void add_directed_edge(int from, int to, T cost = 1) {
+    virtual void add_directed_edge(int from, int to, T cost = 1) {
         g[from].emplace_back(from, to, cost, es++);
     }
 
-    void add_edge(int from, int to, T cost = 1) {
+    // virtual 可以被重载，实现多态
+    virtual void add_edge(int from, int to, T cost = 1) {
         g[from].emplace_back(from, to, cost, es);
         g[to].emplace_back(to, from, cost, es++);
     }

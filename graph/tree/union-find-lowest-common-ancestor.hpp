@@ -1,4 +1,4 @@
-#include "../../structure/union-find.hpp"
+#include "../../structure/union-find/union-find.hpp"
 #include "../graph-template.hpp"
 /*
 并查集:

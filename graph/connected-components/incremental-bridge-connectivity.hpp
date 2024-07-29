@@ -3,7 +3,7 @@
 https://scrapbox.io/data-structures/Incremental_Bridge-Connectivity
 */
 #pragma once
-#include "../../structure/union-find.hpp"
+#include "../../structure/union-find/union-find.hpp"
 
 struct IncrementalBridgeConnectivity {
    public:
