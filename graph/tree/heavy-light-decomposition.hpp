@@ -30,11 +30,44 @@ struct HeavyLightDecomposition : Graph<T> {
         dfs_hld(root, -1, t);
     }
 
+    int la(int v, int k) {
+        // v 向上走 k 步到的点
+        assert(dep[v] >= k);
+        while (1) {
+            int u = head[v];
+            if (in[v] - k >= in[u]) return rev[in[v] - k];
+            k -= in[v] - in[u] + 1;
+            v = par[u];
+        }
+    }
+
     int lca(int u, int v) const {
         for (;; v = par[head[v]]) {
             if (in[u] > in[v]) swap(u, v);
             if (head[u] == head[v]) return u;
         }
+    }
+
+    int dist(int u, int v) const { return dep[u] + dep[v] - 2 * dep[lca(u, v)]; }
+
+    vector<tuple<int, int, bool>> dec(int u, int v) {
+        vector<tuple<int, int, bool>> pu, pv;
+        while (head[u] != head[v]) {
+            if (in[u] > in[v]) {
+                pu.emplace_back(in[head[u]], in[u], true);
+                u = par[head[u]];
+            } else {
+                pv.emplace_back(in[head[v]], in[v], false);
+                v = par[head[v]];
+            }
+        }
+        if (in[u] <= in[v])
+            pv.emplace_back(in[u], in[v], false);
+        else
+            pu.emplace_back(in[v], in[u], true);
+        reverse(pv.begin(), pv.end());
+        pu.insert(pu.end(), pv.begin(), pv.end());
+        return pu;
     }
 
    private:
