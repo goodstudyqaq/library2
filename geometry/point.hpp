@@ -45,11 +45,17 @@ string to_string(const TPoint<T>& p) {
 }
 
 template <typename T>
-bool check(const TPoint<T>& a, const TPoint<T>& b, const TPoint<T>& c) {
+bool check(const TPoint<T>& a, const TPoint<T>& b, const TPoint<T>& c, bool boundaryContain) {
     // ab * bc >= 0 判断 bc 是不是在 ab 的左侧
     // return (b.F-a.F)*(c.S-b.S) >= (b.S-a.S)*(c.F-b.F); return ab * bc >= 0
+
+    auto check2 = [&](T x, T y) {
+        // 包含边界上的点，那么不用加等于号
+        return boundaryContain ? (x > y) : (x >= y);
+    };
+
     if (b.x == a.x || c.x == b.x) {
-        return sign(b.x - a.x) * sign(c.y - b.y) >= sign(c.x - b.x) * sign(b.y - a.y);
+        return check2(sign(b.x - a.x) * sign(c.y - b.y), sign(c.x - b.x) * sign(b.y - a.y));
     }
     // return (b.second - a.second) / (a.first - b.first) >= (c.second - b.second) / (b.first - c.first);
 
@@ -64,10 +70,10 @@ bool check(const TPoint<T>& a, const TPoint<T>& b, const TPoint<T>& c) {
     TPoint<T> right = {ab.y / ab.x, ab.y % ab.x};
 
     if (left.x != right.x) {
-        return left.x >= right.x;
+        return left.x > right.x;
     }
 
-    return left.y * ab.x >= right.y * bc.x;
+    return check2(left.y * ab.x, right.y * bc.x);
     // auto ab = b - a;
     // auto bc = c - b;
     // // 有可能会爆 long long, 有时候需要用除法来避免溢出
