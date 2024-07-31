@@ -1,6 +1,7 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/line_add_get_min"
 #include <bits/stdc++.h>
 
+#include "../geometry/convex-hull.hpp"
 #include "../structure/others/binary-grouping.hpp"
 
 using namespace std;
@@ -18,15 +19,7 @@ struct fast_ios {
         cout << fixed << setprecision(10);
     };
 } fast_ios_;
-using Data = pair<long long, long long>;
-
-Data operator-(const Data &a, const Data &b) {
-    return Data(a.first - b.first, a.second - b.second);
-}
-
-long long operator*(const Data &a, const Data &b) {
-    return a.first * b.second - a.second * b.first;
-}
+using Data = geometry::TPoint<long long>;
 
 struct Structure {
     vector<Data> datas;
@@ -35,49 +28,8 @@ struct Structure {
         datas.emplace_back(d);
     }
 
-    inline int sgn(long long x) { return x == 0 ? 0 : (x < 0 ? -1 : 1); }
-
-    bool check(const Data &a, const Data &b, const Data &c) {
-        // return (b.F-a.F)*(c.S-b.S) >= (b.S-a.S)*(c.F-b.F); return ab * bc >= 0
-        if (b.first == a.first || c.first == b.first) {
-            return sgn(b.first - a.first) * sgn(c.second - b.second) >= sgn(c.first - b.first) * (b.second - a.second);
-        }
-        // return (b.second - a.second) / (a.first - b.first) >= (c.second - b.second) / (b.first - c.first);
-
-        Data ab = b - a;
-        Data bc = c - b;
-
-        if (sgn(ab.first) * sgn(bc.second) != sgn(ab.second) * sgn(bc.first)) {
-            return sgn(ab.first) * sgn(bc.second) >= sgn(ab.second) * sgn(bc.first);
-        }
-
-        Data left = {bc.second / bc.first, bc.second % bc.first};
-        Data right = {ab.second / ab.first, ab.second % ab.first};
-
-        if (left.first != right.first) {
-            return left.first >= right.first;
-        }
-
-        return left.second * ab.first >= right.second * bc.first;
-    }
-
     void build() {
-        convexHull.clear();
-        sort(datas.begin(), datas.end());
-        int tp = 0;
-        vector<int> stk;
-        stk.push_back(0);
-        int n = datas.size();
-        for (int i = 1; i < n; i++) {
-            while (stk.size() >= 2 && check(datas[i], datas[stk.back()], datas[stk[stk.size() - 2]])) {
-                stk.pop_back();
-            }
-            stk.push_back(i);
-        }
-
-        for (int i = 0; i < stk.size(); i++) {
-            convexHull.emplace_back(datas[stk[i]]);
-        }
+        convexHull = geometry::convexHullByAndrew(datas).first;
     }
     static Structure merge(const Structure &s1, const Structure &s2) {
         Structure new_s;
@@ -97,12 +49,12 @@ struct Structure {
         // }
         debug(convexHull);
         long long res = numeric_limits<long long>::max() / 2;
-        res = min(convexHull[0].first * x + convexHull[0].second, convexHull.back().first * x + convexHull.back().second);
+        res = min(convexHull[0].x * x + convexHull[0].y, convexHull.back().x * x + convexHull.back().y);
         int l = 0, r = convexHull.size() - 2;
         while (l <= r) {
             int m = l + r >> 1;
-            long long tmp1 = convexHull[m].first * x + convexHull[m].second;
-            long long tmp2 = convexHull[m + 1].first * x + convexHull[m + 1].second;
+            long long tmp1 = convexHull[m].x * x + convexHull[m].y;
+            long long tmp2 = convexHull[m + 1].x * x + convexHull[m + 1].y;
             if (tmp1 > tmp2) {
                 res = min(res, tmp2);
                 l = m + 1;
