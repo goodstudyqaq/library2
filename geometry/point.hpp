@@ -38,46 +38,15 @@ struct TPoint {
     }
 };
 
-using Point = TPoint<long long>;
 template <typename T>
 string to_string(const TPoint<T>& p) {
     return "(" + std::to_string(p.x) + ", " + std::to_string(p.y) + ")";
 }
 
 template <typename T>
-bool check(const TPoint<T>& a, const TPoint<T>& b, const TPoint<T>& c, bool boundaryContain) {
-    // ab * bc >= 0 判断 bc 是不是在 ab 的左侧
-    // return (b.F-a.F)*(c.S-b.S) >= (b.S-a.S)*(c.F-b.F); return ab * bc >= 0
-
-    auto check2 = [&](T x, T y) {
-        // 包含边界上的点，那么不用加等于号
-        return boundaryContain ? (x > y) : (x >= y);
-    };
-
-    if (b.x == a.x || c.x == b.x) {
-        return check2(sign(b.x - a.x) * sign(c.y - b.y), sign(c.x - b.x) * sign(b.y - a.y));
-    }
-    // return (b.second - a.second) / (a.first - b.first) >= (c.second - b.second) / (b.first - c.first);
-
-    auto ab = b - a;
-    auto bc = c - b;
-
-    if (sign(ab.x) * sign(bc.y) != sign(ab.y) * sign(bc.x)) {
-        return sign(ab.x) * sign(bc.y) >= sign(ab.y) * sign(bc.x);
-    }
-
-    TPoint<T> left = {bc.y / bc.x, bc.y % bc.x};
-    TPoint<T> right = {ab.y / ab.x, ab.y % ab.x};
-
-    if (left.x != right.x) {
-        return left.x > right.x;
-    }
-
-    return check2(left.y * ab.x, right.y * bc.x);
-    // auto ab = b - a;
-    // auto bc = c - b;
-    // // 有可能会爆 long long, 有时候需要用除法来避免溢出
-    // return vmul(ab, bc) >= 0;
+bool compare_by_polar_angle(const TPoint<T>& a, const TPoint<T>& b) {
+    T x = vmul(a, b);
+    return x == 0 ? (a.abs2() < b.abs2()) : x > 0;
 }
 
 }  // namespace geometry

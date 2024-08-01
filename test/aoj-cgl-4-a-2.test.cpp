@@ -34,25 +34,13 @@ int main() {
         points.emplace_back(x, y);
     }
 
-    auto convex = geometry::convex_hull_by_andrew(points, true);
+    auto convex = geometry::convex_hull_by_graham(points, true);
     debug(convex);
-    int sz = convex.first.size() + convex.second.size() - 2;
+    int sz = convex.size();
     cout << sz << endl;
 
-    int begin = 0;
-
-    while (begin + 1 < convex.first.size() && convex.first[begin + 1].y < convex.first[begin].y) {
-        begin++;
-    }
-
-    for (int i = begin; i < convex.first.size(); i++) {
-        cout << convex.first[i].x << ' ' << convex.first[i].y << endl;
-    }
-    for (int i = 1; i < convex.second.size() - 1; i++) {
-        cout << convex.second[i].x << ' ' << convex.second[i].y << endl;
-    }
-    for (int i = 0; i < begin; i++) {
-        cout << convex.first[i].x << ' ' << convex.first[i].y << endl;
+    for (int i = 0; i < sz; i++) {
+        cout << convex[i].x << ' ' << convex[i].y << endl;
     }
     return 0;
 }

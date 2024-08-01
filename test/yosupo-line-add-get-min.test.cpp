@@ -19,17 +19,17 @@ struct fast_ios {
         cout << fixed << setprecision(10);
     };
 } fast_ios_;
-using Data = geometry::TPoint<long long>;
+using Data = geometry::TPoint<__int128>;
 
 struct Structure {
     vector<Data> datas;
-    vector<Data> convexHull;
+    vector<Data> convex_hull;
     virtual void add(const Data &d) {
         datas.emplace_back(d);
     }
 
     void build() {
-        convexHull = geometry::convexHullByAndrew(datas).first;
+        convex_hull = geometry::convex_hull_by_andrew(datas).first;
     }
     static Structure merge(const Structure &s1, const Structure &s2) {
         Structure new_s;
@@ -47,14 +47,13 @@ struct Structure {
         // if (convexHull.size() == 1) {
         //     return convexHull[0].first * x + convexHull[0].second;
         // }
-        debug(convexHull);
         long long res = numeric_limits<long long>::max() / 2;
-        res = min(convexHull[0].x * x + convexHull[0].y, convexHull.back().x * x + convexHull.back().y);
-        int l = 0, r = convexHull.size() - 2;
+        res = min(convex_hull[0].x * x + convex_hull[0].y, convex_hull.back().x * x + convex_hull.back().y);
+        int l = 0, r = convex_hull.size() - 2;
         while (l <= r) {
             int m = l + r >> 1;
-            long long tmp1 = convexHull[m].x * x + convexHull[m].y;
-            long long tmp2 = convexHull[m + 1].x * x + convexHull[m + 1].y;
+            long long tmp1 = convex_hull[m].x * x + convex_hull[m].y;
+            long long tmp2 = convex_hull[m + 1].x * x + convex_hull[m + 1].y;
             if (tmp1 > tmp2) {
                 res = min(res, tmp2);
                 l = m + 1;
