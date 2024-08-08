@@ -1,6 +1,5 @@
 #include <bits/stdc++.h>
 
-#include <type_traits>
 
 #include "./point.hpp"
 using namespace std;
