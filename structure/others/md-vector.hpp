@@ -55,7 +55,7 @@ class md_vector {
         : dsize_(dsize), data_(md_size<dimensions>(dsize), default_value) {
     }
 
-    md_vector& operator=(md_vector<T, dimensions>&& other) {
+    md_vector& operator=(const md_vector<T, dimensions>& other) {
         data_ = other.data_;
         dsize_ = other.dsize_;
         return *this;
