@@ -19,7 +19,12 @@ struct Matrix {
         return A.dsize_[1];
     }
 
-    inline auto operator[](int k) { return A[k]; }
+    inline const auto operator[](int k) const {
+        return A[k];
+    }
+    inline auto operator[](int k) {
+        return A[k];
+    }
 
     static Matrix I(int n) {
         Matrix<T> mat(n);
@@ -29,7 +34,7 @@ struct Matrix {
         return mat;
     }
 
-    Matrix &operator+=(Matrix &b) {
+    Matrix &operator+=(const Matrix &b) {
         int n = height(), m = width();
         assert(n == b.height() && m == b.width());
         for (int i = 0; i < n; i++) {
@@ -51,7 +56,7 @@ struct Matrix {
         return (*this);
     }
 
-    Matrix &operator*=(Matrix &b) {
+    Matrix &operator*=(const Matrix &b) {
         int n = height(), m = b.width(), p = width();
 
         assert(p == b.height());
@@ -79,14 +84,14 @@ struct Matrix {
         return (*this);
     }
 
-    Matrix operator+(const Matrix &b) {
+    Matrix operator+(const Matrix &b) const {
         return (Matrix(*this) += b);
     }
 
     Matrix operator-(const Matrix &b) {
         return (Matrix(*this) -= b);
     }
-    Matrix operator*(const Matrix &b) {
+    Matrix operator*(const Matrix &b) const {
         return (Matrix(*this) *= b);
     }
     Matrix operator^(const long long k) {

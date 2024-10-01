@@ -50,7 +50,7 @@ struct BIT {
                 x -= a[res];
             }
         }
-        return res;
+        return res + 1;
     }
 
     int upper_bound(T x) const {
@@ -63,7 +63,7 @@ struct BIT {
                 x -= a[res];
             }
         }
-        return res;
+        return res + 1;
     }
 };
 

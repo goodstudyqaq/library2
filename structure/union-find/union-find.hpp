@@ -13,7 +13,7 @@ struct UnionFind {
         iota(f.begin(), f.end(), 0);
     }
 
-    bool unite(int x, int y) { // x merge to y
+    bool unite(int x, int y) {  // x merge to y
         x = find(x), y = find(y);
         if (x == y) return false;
         data[y] += data[x];
@@ -35,13 +35,15 @@ struct UnionFind {
     }
     vector<vector<int>> groups() {
         int n = (int)data.size();
-        vector<vector<int>> ans;
+        vector<vector<int>> ans(n);
         for (int i = 0; i < n; i++) {
             ans[find(i)].push_back(i);
         }
+
         ans.erase(remove_if(ans.begin(), ans.end(), [&](const vector<int>& v) {
-            return v.empty();
-        }));
+                      return v.empty();
+                  }),
+                  ans.end());
         return ans;
     }
 };
