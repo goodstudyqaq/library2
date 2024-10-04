@@ -54,7 +54,7 @@ struct LazySegmentTree {
         return rangeQuery(L, R - 1, 0, n - 1, 1);
     }
 
-    int find_first(int ll, int rr, const function<bool(const Info &)> &f) {  // 找到第一个满足 f 的位置 idx, 使用这个函数的前提是在 [ll, idx - 1] 的任意区间都不满足 f,而对于任意 r，[ll, r], r >= idx 都满足 f。
+    int find_first(int ll, int rr, const function<bool(const Info &)> &f) {  // 找到第一个满足 f 的位置 idx, 可以理解在原数组中[ll, idx - 1] 都不满足 f
         return find_first(ll, rr - 1, f, 0, n - 1, 1);
     }
 
@@ -129,7 +129,7 @@ struct LazySegmentTree {
         push_up(l, r, rt);
     }
 
-    int find_first_knowingly(const function<bool(const Info &)> f, int l, int r, int rt) {
+    int find_first_knowingly(const function<bool(const Info &)> &f, int l, int r, int rt) {
         if (l == r) {
             return l;
         }
@@ -145,7 +145,7 @@ struct LazySegmentTree {
         return res;
     }
 
-    int find_first(int L, int R, const function<bool(const Info &)> f, int l, int r, int rt) {
+    int find_first(int L, int R, const function<bool(const Info &)> &f, int l, int r, int rt) {
         if (L <= l && r <= R) {
             if (!f(info[rt])) {
                 return -1;
@@ -165,7 +165,7 @@ struct LazySegmentTree {
         return res;
     }
 
-    int find_last_knowingly(const function<bool(const Info &)> f, int l, int r, int rt) {
+    int find_last_knowingly(const function<bool(const Info &)> &f, int l, int r, int rt) {
         if (l == r) {
             return l;
         }
@@ -181,7 +181,7 @@ struct LazySegmentTree {
         return res;
     }
 
-    int find_last(int L, int R, const function<bool(const Info &)> f, int l, int r, int rt) {
+    int find_last(int L, int R, const function<bool(const Info &)> &f, int l, int r, int rt) {
         if (L <= l && r <= R) {
             if (!f(info[rt])) {
                 return -1;

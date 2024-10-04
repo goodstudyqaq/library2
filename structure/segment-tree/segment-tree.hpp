@@ -1,4 +1,6 @@
 #include <bits/stdc++.h>
+
+#include <functional>
 using namespace std;
 /*
 半群单点更新，区间查询操作
@@ -9,8 +11,8 @@ todo: find_first + find_last
 struct Info {
     // 默认值
     Info() {}
-    static Info merge(const Info& left_info, const Info& right_info, int l, int r) { 
-        return Info(); 
+    static Info merge(const Info& left_info, const Info& right_info, int l, int r) {
+        return Info();
     }
     string to_string() {
         return "";
@@ -22,6 +24,7 @@ template <typename Info>
 struct SegmentTree {
 #define lson l, m, rt << 1
 #define rson m + 1, r, rt << 1 | 1
+
     SegmentTree(int n) : n(n), merge(Info::merge), info(4 << __lg(n)) {}
     SegmentTree(const vector<Info>& init) : SegmentTree(init.size()) {
         function<void(int, int, int)> build = [&](int l, int r, int rt) {
@@ -49,6 +52,14 @@ struct SegmentTree {
     // 单点赋值, 会将下标为 L 的点直接赋值为 v
     void assign(int L, const Info& v) {
         return assign(L, v, 0, n - 1, 1);
+    }
+
+    int find_first(int ll, int rr, const function<bool(const Info&)>& f) {
+        return find_first(ll, rr - 1, f, 0, n - 1, 1);
+    }
+
+    int find_last(int ll, int rr, const function<bool(const Info&)>& f) {
+        return find_last(ll, rr - 1, f, 0, n - 1, 1);
     }
 
     string to_string(int u, int l, int r, string prefix, bool is_lch) {
@@ -120,6 +131,57 @@ struct SegmentTree {
         }
         push_up(rt, l, r);
     }
+
+    int find_first_knowingly(const function<bool(const Info&)>& f, int l, int r, int rt) {
+        if (l == r) {
+            return l;
+        }
+        int m = l + r >> 1;
+        int res;
+        if (f(info[rt << 1])) {
+            res = find_first_knowingly(f, lson);
+        } else {
+            res = find_first_knowingly(f, rson);
+        }
+        return res;
+    }
+
+    int find_first(int L, int R, const function<bool(const Info&)>& f, int l, int r, int rt) {
+        if (L <= l && r <= R) {
+            if (!f(info[rt])) {
+                return -1;
+            }
+            return find_first_knowingly(f, l, r, rt);
+        }
+        int m = l + r >> 1;
+        int res = -1;
+        if (L <= m) {
+            res = find_first(L, R, f, lson);
+        }
+        if (R > m && res == -1) {
+            res = find_first(L, R, f, rson);
+        }
+        return res;
+    }
+
+    int find_last(int L, int R, const function<bool(const Info&)>& f, int l, int r, int rt) {
+        if (L <= l && r <= R) {
+            if (!f(info[rt])) {
+                return -1;
+            }
+            return find_last_knowingly(f, l, r, rt);
+        }
+        int m = l + r >> 1;
+        int res = -1;
+        if (R > m) {
+            res = find_last(L, R, f, rson);
+        }
+        if (L <= m && res == -1) {
+            res = find_last(L, R, f, lson);
+        }
+        return res;
+    }
+
 #undef lson
 #undef rson
 };
