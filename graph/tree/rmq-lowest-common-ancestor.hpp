@@ -1,7 +1,9 @@
 #include "../../structure/others/sparse-table.hpp"
 #include "../graph-template.hpp"
 /*
-有点奇怪的写法，记录 dfs 时经过的每个点到 ord 里，维护每个点第一次在 ord 里的下标 in，求两个点的 lca 等价于ord 里 [in[a], in[b]] 中 dep 最小的那个点。感觉很合理。
+有点奇怪的写法，记录 dfs 时经过的每个点到 ord 里，维护每个点第一次在 ord 里的下标 in，求两个点的 lca 等价于ord 里 [in[a], in[b]] 中 dep 最小的那个点。感觉很合理。 
+这个顺序就是欧拉序，即 dfs 时经过的点的顺序，但是叶子节点只算 1 次，而不算进出 2 次。
+还有一个顺序叫括号序，即 dfs 时每个点进栈出栈的顺序，叶子节点会算 2 次。
 */
 
 template <typename T = int>

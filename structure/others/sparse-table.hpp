@@ -6,7 +6,6 @@ using namespace std;
 幂等半群的区间查询,
 1. fold 查询 [l, r) 的值
 
-需要补充一些二分函数，O(log) 找到值
 */
 // using F = function<int(int, int)>
 template <typename T, typename F>
