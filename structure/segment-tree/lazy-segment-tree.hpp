@@ -29,7 +29,12 @@ struct LazySegmentTree {
 #define rson m + 1, r, rt << 1 | 1
     LazySegmentTree(int n) : n(n), merge(Info::merge), info(4 << std::__lg(n)), tag(4 << std::__lg(n)) {}
     LazySegmentTree(vector<Info> &init) : LazySegmentTree(init.size()) {
+        initSegmentTree(init);
+    }
+
+    void initSegmentTree(vector<Info> &init) {
         function<void(int, int, int)> build = [&](int l, int r, int rt) {
+            tag[rt] = Tag();
             if (l == r) {
                 info[rt] = init[l];
                 return;

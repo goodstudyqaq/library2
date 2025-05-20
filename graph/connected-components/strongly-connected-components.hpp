@@ -14,7 +14,7 @@ struct StronglyConnectedComponents : Graph<T> {
     using Graph<T>::Graph;
     using Graph<T>::g;
     vector<int> comp;           // comp[i] i 点在的组 id
-    Graph<T> dag;               // 缩点后的图
+    Graph<T> dag;               // 缩点的图
     vector<vector<int>> group;  // group[i] 表示第 i 组有的点
 
     void build() {
