@@ -1,5 +1,5 @@
 #include <limits>
-#define PROBLEM "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_1_A"
+// competitive-verifier: PROBLEM http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_1_A
 #include "../graph/shortest-path/dijkstra.hpp"
 
 int main() {

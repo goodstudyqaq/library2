@@ -1,5 +1,5 @@
 #include <limits>
-#define PROBLEM "https://judge.yosupo.jp/problem/segment_add_get_min"
+// competitive-verifier: PROBLEM https://judge.yosupo.jp/problem/segment_add_get_min
 #include <bits/stdc++.h>
 
 #include "../structure/segment-tree/dynamic-li-chao-segment-tree.hpp"

@@ -1,5 +1,5 @@
 
-#define PROBLEM "https://judge.yosupo.jp/problem/scc"
+// competitive-verifier: PROBLEM https://judge.yosupo.jp/problem/scc
 #include <bits/stdc++.h>
 
 #include "../graph/connected-components/strongly-connected-components.hpp"
