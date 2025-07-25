@@ -21,6 +21,9 @@ struct CumulativeSum2D {
     }
 
     T query(int sx, int sy, int gx, int gy) const {
+        /*求 [sx, sy] ~ [gx, gy] 整个矩形的和，都是闭区间 */
+        gx++;
+        gy++;
         return (data[gx][gy] - data[sx][gy] - data[gx][sy] + data[sx][sy]);
     }
 };
