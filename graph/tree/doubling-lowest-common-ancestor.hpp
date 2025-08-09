@@ -1,23 +1,19 @@
+#pragma once
 #include "../graph-template.hpp"
 /*
 树上倍增找 lca
 */
 
 template <typename T = int>
-struct DoublingLowestCommonAncestor : Graph<T> {
-    using Graph<T>::g;
-    vector<int> dep;
-    vector<T> sum;
-    vector<vector<int> > table;
-    const int LOG;
+struct DoublingLowestCommonAncestor {
+    explicit DoublingLowestCommonAncestor() {}
 
-    explicit DoublingLowestCommonAncestor(int n)
-        : Graph<T>(n), LOG(32 - __builtin_clz(g.size())) {}
-
-    explicit DoublingLowestCommonAncestor(const Graph<T> &g)
-        : LOG(32 - __builtin_clz(g.size())), Graph<T>(g) {}
+    explicit DoublingLowestCommonAncestor(const Graph<T> &g, int root = 0) : g(g) {
+        build(root);
+    }
 
     void build(int root = 0) {
+        LOG = 32 - __builtin_clz(g.size());
         dep.assign(g.size(), 0);
         sum.assign(g.size(), 0);
         table.assign(LOG, vector<int>(g.size(), -1));
@@ -56,6 +52,12 @@ struct DoublingLowestCommonAncestor : Graph<T> {
     T dist(int u, int v) { return sum[u] + sum[v] - 2 * sum[lca(u, v)]; }
 
    private:
+    vector<int> dep;
+    vector<T> sum;
+    vector<vector<int> > table;
+    int LOG;
+    const Graph<T> &g;
+
     void dfs(int idx, int par, int d) {
         table[0][idx] = par;
         dep[idx] = d;

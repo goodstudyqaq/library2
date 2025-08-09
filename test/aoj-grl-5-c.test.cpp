@@ -25,17 +25,18 @@ int main() {
 #endif
     int n, q;
     cin >> n;
-    DoublingLowestCommonAncestor<> lca(n);
+    Graph<int> g(n);
     for (int i = 0; i < n; i++) {
         int k;
         cin >> k;
         for (int j = 0; j < k; j++) {
             int c;
             cin >> c;
-            lca.add_edge(i, c);
+            g.add_edge(i, c);
         }
     }
-    lca.build();
+    DoublingLowestCommonAncestor lca(g);
+    lca.build(0);
 
     cin >> q;
     for (int i = 0; i < q; i++) {
