@@ -1,5 +1,5 @@
 ---
-title: 欧拉路
+title: Euler path
 documentation_of: //graph/others/euler.hpp
 ---
 # 欧拉路 

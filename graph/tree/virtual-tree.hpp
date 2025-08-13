@@ -1,4 +1,4 @@
-#include "../graph/graph-template.hpp"
+#include "../graph-template.hpp"
 #include "./doubling-lowest-common-ancestor.hpp"
 
 template <typename T>
