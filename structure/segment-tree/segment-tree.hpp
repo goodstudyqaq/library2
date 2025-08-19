@@ -27,6 +27,10 @@ struct SegmentTree {
 
     SegmentTree(int n) : n(n), merge(Info::merge), info(4 << __lg(n)) {}
     SegmentTree(const vector<Info>& init) : SegmentTree(init.size()) {
+        initSegmentTree(init);
+    }
+
+    void initSegmentTree(vector<Info>& init) {
         function<void(int, int, int)> build = [&](int l, int r, int rt) {
             if (l == r) {
                 info[rt] = init[l];
