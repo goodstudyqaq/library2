@@ -2,11 +2,12 @@
 #include "./doubling-lowest-common-ancestor.hpp"
 
 template <typename T>
-struct VirtualTree {
+struct VirtualTree : Graph<T> {
    public:
-    VirtualTree() {}
+    using Graph<T>::Graph;
+    using Graph<T>::g;
 
-    Graph<T> build(const Graph<T>& g, const vector<int>& points, int root = 0) {
+    Graph<T> build(const vector<int> &points, const int root) {
         DoublingLowestCommonAncestor<T> LCA = DoublingLowestCommonAncestor(g, root);
 
         timestamp = 0;
