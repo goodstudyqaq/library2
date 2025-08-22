@@ -1,7 +1,7 @@
+#pragma once
 /*
 边双连通分量: 在一张连通的无向图中，对于两个点 u 和 v，如果无论删去哪条边（只能删去一条）都不能使它们不连通，我们就说 u 和 v 边双连通。
 */
-#pragma once
 
 #include "../others/low-link.hpp"
 
