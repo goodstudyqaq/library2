@@ -30,7 +30,7 @@ struct SegmentTree {
         initSegmentTree(init);
     }
 
-    void initSegmentTree(vector<Info>& init) {
+    void initSegmentTree(const vector<Info>& init) {
         function<void(int, int, int)> build = [&](int l, int r, int rt) {
             if (l == r) {
                 info[rt] = init[l];
