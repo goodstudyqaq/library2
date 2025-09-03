@@ -1,4 +1,3 @@
-// https://goodstudyqaq.notion.site/Convex-hull-trick-263c5c0415c48017bc01c34c3d8d0bc0
 
 #include <bits/stdc++.h>
 
@@ -8,6 +7,8 @@
 
 #include "./base.hpp"
 #include "./point.hpp"
+
+// https://goodstudyqaq.notion.site/Convex-hull-trick-263c5c0415c48017bc01c34c3d8d0bc0
 using namespace std;
 
 namespace geometry {
