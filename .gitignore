@@ -12,3 +12,8 @@ work.bat
 compile_commands.json
 .verify-helper/config.toml
 tmp.cpp
+
+verify.json
+verify_result.json
+tmp.json
+.competitive-verifier/*

@@ -19,7 +19,7 @@ struct fast_ios {
         cout << fixed << setprecision(10);
     };
 } fast_ios_;
-using Data = geometry::TPoint<long long>;
+using Data = geometry::ConvexHullTrick<long long>::Line;
 
 struct Structure {
     vector<Data> datas;
