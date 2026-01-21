@@ -3,6 +3,7 @@
 using namespace std;
 
 // https://codeforces.com/contest/220/submission/359114778
+// 复杂度: O(n ^ {3 / 2})
 struct Mo {
     struct Query {
         int l, r, idx;
